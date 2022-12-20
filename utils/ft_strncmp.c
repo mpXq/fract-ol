@@ -1,37 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   ft_strncmp.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfaria-d <pfaria-d@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/19 10:59:03 by pfaria-d          #+#    #+#             */
-/*   Updated: 2022/12/20 19:15:34 by pfaria-d         ###   ########.fr       */
+/*   Created: 2022/11/08 08:27:55 by pfaria-d          #+#    #+#             */
+/*   Updated: 2022/12/20 13:44:59 by pfaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#include "utils.h"
 
-# include <mlx.h>
-# include <math.h>
-# include <stdlib.h>
-# include "utils/utils.h"
-# include "sets/sets.h"
+int	ft_strncmp(const char *s1, const char *s2, size_t size)
+{
+	size_t	i;
 
-# ifndef MAXITERATION
-#  define MAXITERATION 10
-# endif
-
-# ifndef ZX
-#  define ZX "-1"
-# endif
-
-# ifndef ZY
-#  define ZY "0"
-# endif
-
-int	ft_input(int key, void *param);
-int	ft_update(void *param);
-
-#endif
+	i = 0;
+	if (size == 0)
+		return (0);
+	while (i < size - 1 && s1[i] == s2[i] && s2[i] && s1[i])
+		i++;
+	if (!(i < size) && s1[i - 1] == s2[i - 1])
+		return (0);
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+}

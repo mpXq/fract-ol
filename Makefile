@@ -6,11 +6,11 @@
 #    By: pfaria-d <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 10:49:47 by pfaria-d          #+#    #+#              #
-#    Updated: 2022/12/20 12:25:08 by pfaria-d         ###   ########.fr        #
+#    Updated: 2022/12/20 18:38:52 by pfaria-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = sets/mandelbrot-set.c sets/mlxutils.c
+SRC = fract-ol.c sets/mandelbrot-set.c sets/mlxutils.c utils/ft_printf.c utils/ft_printf_nbrb.c utils/ft_printf_utils1.c utils/ft_strncmp.c utils/ft_atoi.c sets/julia-set.c hooks.c
 
 OBJS = $(SRC:.c=.o)
 
@@ -28,7 +28,7 @@ all: $(NAME)
 	$(GCC) -Imlx -c $< -o $@
 
 $(NAME): $(OBJS)
-	$(CC) $(OBJS) -Lmlx -lmlx -framework OpenGL -framework AppKit -o $(NAME)
+	$(CC) $(OBJS) -lmlx -framework OpenGL -framework AppKit -o $(NAME)
 
 bonus:
 			@make MAKEBONUS=1 all

@@ -1,37 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   fractol.h                                          :+:      :+:    :+:   */
+/*   ft_printf.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfaria-d <pfaria-d@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/19 10:59:03 by pfaria-d          #+#    #+#             */
-/*   Updated: 2022/12/20 19:15:34 by pfaria-d         ###   ########.fr       */
+/*   Created: 2022/11/16 09:58:23 by pfaria-d          #+#    #+#             */
+/*   Updated: 2022/12/20 13:39:47 by pfaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FRACTOL_H
-# define FRACTOL_H
+#include "utils.h"
 
-# include <mlx.h>
-# include <math.h>
-# include <stdlib.h>
-# include "utils/utils.h"
-# include "sets/sets.h"
+int	ft_printf(const	char *str, ...)
+{
+	size_t	i;
+	va_list	aptr;
+	size_t	tmp;
+	char	*b;
 
-# ifndef MAXITERATION
-#  define MAXITERATION 10
-# endif
-
-# ifndef ZX
-#  define ZX "-1"
-# endif
-
-# ifndef ZY
-#  define ZY "0"
-# endif
-
-int	ft_input(int key, void *param);
-int	ft_update(void *param);
-
-#endif
+	i = 0;
+	b = "0123456789";
+	va_start(aptr, str);
+	while (str[i])
+	{
+		if (str[i] == '%' && str[i + 1])
+		{
+			i++;
+			tmp = i;
+			while (str[i] == ' ' && str[i + 1])
+				i++;
+			if (str[i] != '%' && tmp != i)
+				return (0);
+		}
+		i++;
+	}
+	return (ft_printfnbr(str, aptr, b));
+}

@@ -6,11 +6,11 @@
 #    By: pfaria-d <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/19 10:49:47 by pfaria-d          #+#    #+#              #
-#    Updated: 2022/12/19 15:44:54 by pfaria-d         ###   ########.fr        #
+#    Updated: 2022/12/20 12:25:08 by pfaria-d         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRC = fract-ol.c extra/ft_atoi.c
+SRC = sets/mandelbrot-set.c sets/mlxutils.c
 
 OBJS = $(SRC:.c=.o)
 

@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   mandelbrot-set.c                                   :+:      :+:    :+:   */
+/*   julia-set.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfaria-d <pfaria-d@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:42:22 by pfaria-d          #+#    #+#             */
-/*   Updated: 2022/12/20 15:04:10 by pfaria-d         ###   ########.fr       */
+/*   Updated: 2022/12/21 14:01:09 by pfaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,14 @@ static int	pcalculator(long double x, long double y, double zx, double zy)
 		&& ((mset->nbx * mset->nbx) + (mset->nby * mset->nby) <= 4.0))
 	{
 		mset->tmp = mset->nbx * mset->nbx - mset->nby * mset->nby + zx;
-		mset->nby = 2.0 * mset->nbx * mset->nby + zy;
+		mset->nby = 2.0 * mset->nbx * mset->nby - zy;
 		mset->nbx = mset->tmp;
 	}
 	free(mset);
 	return (i);
 }
 
-static void	mspawner(t_data img, t_fractol *mset, double zx, double zy)
+static void	jspawner(t_data img, t_fractol *mset, double zx, double zy)
 {
 	mset->x = 1080;
 	while (mset->x --)
@@ -41,10 +41,12 @@ static void	mspawner(t_data img, t_fractol *mset, double zx, double zy)
 		mset->y = 1080;
 		while (mset->y --)
 		{
-			mset->rgb = pcalculator(mset->x, mset->y, zx, zy) / 50.0 * 255.0;
+			if (!mset->rgb)
+				mset->rgb = pcalculator(mset->x, mset->y, zx, zy)
+					/ 50.0 * 255.0;
 			my_mlx_pixel_put(&img, mset->x, mset->y, rgb(mset->rgb));
 			if (pcalculator(mset->x, mset->y, zx, zy) == MAXITERATION)
-				my_mlx_pixel_put(&img, mset->x, mset->y, 0x00000000);
+				my_mlx_pixel_put(&img, mset->x, mset->y, 0);
 		}
 	}
 }
@@ -62,7 +64,7 @@ void	julia_set(long double zx, long double zy)
 	img.img = mlx_new_image(mlx, 1080, 1080);
 	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length,
 			&img.endian);
-	mspawner(img, mset, zx, zy);
+	jspawner(img, mset, zx, zy);
 	mlx_put_image_to_window(mlx, mlx_win, img.img, 0, 0);
 	mlx_loop(mlx);
 	free(mset);

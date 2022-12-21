@@ -6,7 +6,7 @@
 /*   By: pfaria-d <pfaria-d@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:42:22 by pfaria-d          #+#    #+#             */
-/*   Updated: 2022/12/20 19:20:07 by pfaria-d         ###   ########.fr       */
+/*   Updated: 2022/12/21 21:16:14 by pfaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,23 +15,24 @@
 //cx = constant x
 //cy = constant y
 
-long double	cx(long double x, long double zoom)
+long double	cx(long double x, long double mx, long double zoom)
 {
 	long double	rep;
 
-	rep = (((x) / (1080.0 * zoom)) * 2.47) - 1.5;
+	rep = (((x + (mx * zoom)) / (540. * zoom)) * 2.47) - 1.5;
 	return (rep);
 }
 
-long double	cy(long double y, long double zoom)
+long double	cy(long double y, long double my, long double zoom)
 {
 	long double	rep;
 
-	rep = (((y) / (1080.0 * zoom)) * 2.24) - 1.12;
+	rep = (((y + (my * zoom)) / (540. * zoom)) * 2.24) - 1.12;
 	return (rep);
 }
 
-int	pixelcalculator(long double x, long double y, long double zoom)
+int	pixelcalculator(long double x, long double y, long double zoom,
+		t_fractol *m)
 {
 	int			i;
 	t_fractol	mset;
@@ -42,8 +43,9 @@ int	pixelcalculator(long double x, long double y, long double zoom)
 	while (++i < MAXITERATION
 		&& ((mset.nbx * mset.nbx) + (mset.nby * mset.nby) <= 4.0))
 	{
-		mset.tmp = mset.nbx * mset.nbx - mset.nby * mset.nby + cx(x, zoom);
-		mset.nby = 2.0 * mset.nbx * mset.nby + cy(y, zoom);
+		mset.tmp = mset.nbx * mset.nbx - mset.nby * mset.nby
+			+ cx(x, m->mx, zoom);
+		mset.nby = 2.0 * mset.nbx * mset.nby + cy(y, m->my, zoom);
 		mset.nbx = mset.tmp;
 	}
 	return (i);
@@ -52,17 +54,16 @@ int	pixelcalculator(long double x, long double y, long double zoom)
 void	mspawner(t_data img, t_fractol *mset)
 {
 	mset->x = 0;
-	while (mset->x ++ < 1079)
+	while (mset->x ++ < 539)
 	{
 		mset->y = 0;
-		while (mset->y ++ < 1079)
+		while (mset->y ++ < 539)
 		{
-			mset->rgb = pixelcalculator(mset->x, mset->y,
-					mset->zoom) / 50.0 * 255.0;
 			my_mlx_pixel_put(&img, mset->x, mset->y,
-				pixelcalculator(mset->x, mset->y, mset->zoom) * 3);
-			if (pixelcalculator(mset->x, mset->y, mset->zoom) == MAXITERATION)
-				my_mlx_pixel_put(&img, mset->x, mset->y, 0x00000000);
+				pixelcalculator(mset->x, mset->y, mset->zoom, mset) * 3);
+			if (pixelcalculator(mset->x, mset->y, mset->zoom, mset)
+				== MAXITERATION)
+				my_mlx_pixel_put(&img, mset->x, mset->y, mset->rgb);
 		}
 	}
 }
@@ -72,16 +73,17 @@ void	mandelbrot_set(void)
 	t_program	program;
 
 	program.fractol.zoom = 1;
+	program.fractol.mx = 0;
+	program.fractol.my = 0;
 	program.mlx = mlx_init();
-	program.window = new_window(program.mlx, 1080, 1080, "Mandelbrot set");
-	program.img.img = mlx_new_image(program.mlx, 1080, 1080);
+	program.window = new_window(program.mlx, 540, 540, "Mandelbrot set");
+	program.img.img = mlx_new_image(program.mlx, 540, 540);
 	program.img.addr = mlx_get_data_addr(program.img.img,
 			&program.img.bits_per_pixel, &program.img.line_length,
 			&program.img.endian);
 	mspawner(program.img, &program.fractol);
 	mlx_put_image_to_window(program.mlx, program.window.reference,
 		program.img.img, 0, 0);
-	mlx_mouse_hook(program.window.reference, *ft_input, &program);
-	mlx_loop_hook(program.mlx, *ft_update, &program);
+	mlx_mouse_hook(program.window.reference, ft_input, &program);
 	mlx_loop(program.mlx);
 }

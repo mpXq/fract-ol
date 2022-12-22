@@ -6,7 +6,7 @@
 /*   By: pfaria-d <pfaria-d@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 18:23:01 by pfaria-d          #+#    #+#             */
-/*   Updated: 2022/12/21 21:14:04 by pfaria-d         ###   ########.fr       */
+/*   Updated: 2022/12/22 10:56:32 by pfaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,19 @@ int	ft_input(int key, int x, int y, t_program *param)
 		}
 		else if (key == 4 && param->fractol.zoom == 2)
 		{
-			param->fractol.mx = 0;
-			param->fractol.my = 0;
+			param->fractol.mx = 0.;
+			param->fractol.my = 0.;
 			param->fractol.zoom--;
 		}
 		else if (key == 5 || key == 1)
 		{
-			param->fractol.mx = x;
-			param->fractol.my = y;
-			param->fractol.zoom *= 2;
+			param->fractol.tmx += x / param->fractol.zoom;
+			param->fractol.tmy += y / param->fractol.zoom;
+			param->fractol.zoom *= 2.;
+			param->fractol.mx = param->fractol.tmx * param->fractol.zoom;
+			param->fractol.my = param->fractol.tmy * param->fractol.zoom;
 		}
 		mlx_clear_window(param->mlx, param->window.reference);
-		param->img.addr = mlx_get_data_addr(param->img.img,
-			&param->img.bits_per_pixel, &param->img.line_length,
-			&param->img.endian);
 		mspawner(param->img, &param->fractol);
 		mlx_put_image_to_window(param->mlx, param->window.reference,
 			param->img.img, 0, 0);

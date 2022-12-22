@@ -6,7 +6,7 @@
 /*   By: pfaria-d <pfaria-d@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:43:26 by pfaria-d          #+#    #+#             */
-/*   Updated: 2022/12/21 21:14:21 by pfaria-d         ###   ########.fr       */
+/*   Updated: 2022/12/22 10:52:30 by pfaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,8 @@ typedef struct s_fractol {
 	long double			nby;
 	long double			mx;
 	long double			my;
-//	long double			startx;
-//	long double			starty;
+	long double			tmx;
+	long double			tmy;
 	long double			x;
 	long double			y;
 	long double			tmp;

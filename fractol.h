@@ -6,7 +6,7 @@
 /*   By: pfaria-d <pfaria-d@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/19 10:59:03 by pfaria-d          #+#    #+#             */
-/*   Updated: 2022/12/21 21:10:36 by pfaria-d         ###   ########.fr       */
+/*   Updated: 2022/12/22 11:07:15 by pfaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include "sets/sets.h"
 
 # ifndef MAXITERATION
-#  define MAXITERATION 500
+#  define MAXITERATION 5000
 # endif
 
 #endif

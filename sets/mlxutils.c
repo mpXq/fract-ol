@@ -6,7 +6,7 @@
 /*   By: pfaria-d <pfaria-d@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:55:12 by pfaria-d          #+#    #+#             */
-/*   Updated: 2022/12/22 15:08:53 by pfaria-d         ###   ########.fr       */
+/*   Updated: 2022/12/22 16:00:18 by pfaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,5 @@ int	ft_close(t_program *vars)
 {
 	mlx_destroy_image(vars->mlx, vars->img.img);
 	mlx_destroy_window(vars->mlx, vars->window.reference);
-	system("leaks fractol");
 	exit(0);
 }

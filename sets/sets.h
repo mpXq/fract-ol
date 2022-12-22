@@ -6,7 +6,7 @@
 /*   By: pfaria-d <pfaria-d@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:43:26 by pfaria-d          #+#    #+#             */
-/*   Updated: 2022/12/22 14:42:54 by pfaria-d         ###   ########.fr       */
+/*   Updated: 2022/12/22 17:02:38 by pfaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,16 +53,30 @@ typedef struct s_window {
 }				t_window;
 
 typedef struct s_program {
-	void		*mlx;
-	t_data		img;
-	t_window	window;
-	t_fractol	fractol;
+	void				*mlx;
+	long double			cx;
+	long double			cy;
+	t_data				img;
+	t_window			window;
+	t_fractol			fractol;
 }				t_program;
 
 # ifndef MAXITERATION
-#  define MAXITERATION 150
+#  define MAXITERATION 100
 # endif
 
+int			jpixelcalculator(long double x, long double y, t_program *m);
+void		jspawner(t_data img, t_fractol *mset, t_program *m);
+void		julia_set(long double cx, long double cy);
+int			ft_jchangecolor(t_program *param);
+int			ft_jinput123(t_program *param);
+int			ft_jinput124(t_program *param);
+int			ft_jinput125(t_program *param);
+int			ft_jinput126(t_program *param);
+int			ft_jinput51(int x, int y, t_program *param);
+int			ft_jinput(int key, int x, int y, t_program *param);
+int			ft_jinputk(int key, t_program *param);
+int			ft_jinput42(int x, int y, t_program *param);
 int			ft_input(int key, int x, int y, t_program *param);
 void		my_mlx_pixel_put(t_data *data, int x, int y, int color);
 int			rgb(int rgb);
@@ -80,5 +94,18 @@ int			ft_input125(t_program *param);
 int			ft_input126(t_program *param);
 int			ft_changecolor(t_program *param);
 int			ft_close(t_program *vars);
+void		burningship_set(void);
+void		bspawner(t_data img, t_fractol *mset);
+int			bpixelcalculator(long double x, long double y, long double zoom,
+				t_fractol *m);
+int			ft_bchangecolor(t_program *param);
+int			ft_binput123(t_program *param);
+int			ft_binput124(t_program *param);
+int			ft_binput125(t_program *param);
+int			ft_binput126(t_program *param);
+int			ft_binput42(int x, int y, t_program *param);
+int			ft_binput51(int x, int y, t_program *param);
+int			ft_binputk(int key, t_program *param);
+int			ft_binput(int key, int x, int y, t_program *param);
 
 #endif

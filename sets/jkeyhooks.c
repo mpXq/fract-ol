@@ -1,62 +1,62 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   keyhooks.c                                         :+:      :+:    :+:   */
+/*   jkeyhooks.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pfaria-d <pfaria-d@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/22 15:38:56 by pfaria-d          #+#    #+#             */
-/*   Updated: 2022/12/22 15:38:59 by pfaria-d         ###   ########.fr       */
+/*   Created: 2022/12/22 15:40:40 by pfaria-d          #+#    #+#             */
+/*   Updated: 2022/12/22 15:52:25 by pfaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "sets.h"
 
-int	ft_input123(t_program *param)
+int	ft_jinput123(t_program *param)
 {
 	param->fractol.tmx -= 100 / param->fractol.zoom;
 	param->fractol.mx = param->fractol.tmx * param->fractol.zoom;
 	mlx_clear_window(param->mlx, param->window.reference);
-	mspawner(param->img, &param->fractol);
+	jspawner(param->img, &param->fractol, param);
 	mlx_put_image_to_window(param->mlx, param->window.reference,
 		param->img.img, 0, 0);
 	return (0);
 }
 
-int	ft_input125(t_program *param)
+int	ft_jinput125(t_program *param)
 {
 	param->fractol.tmy += 100 / param->fractol.zoom;
 	param->fractol.my = param->fractol.tmy * param->fractol.zoom;
 	mlx_clear_window(param->mlx, param->window.reference);
-	mspawner(param->img, &param->fractol);
+	jspawner(param->img, &param->fractol, param);
 	mlx_put_image_to_window(param->mlx, param->window.reference,
 		param->img.img, 0, 0);
 	return (0);
 }
 
-int	ft_input126(t_program *param)
+int	ft_jinput126(t_program *param)
 {
 	param->fractol.tmy -= 100 / param->fractol.zoom;
 	param->fractol.my = param->fractol.tmy * param->fractol.zoom;
 	mlx_clear_window(param->mlx, param->window.reference);
-	mspawner(param->img, &param->fractol);
+	jspawner(param->img, &param->fractol, param);
 	mlx_put_image_to_window(param->mlx, param->window.reference,
 		param->img.img, 0, 0);
 	return (0);
 }
 
-int	ft_input124(t_program *param)
+int	ft_jinput124(t_program *param)
 {
 	param->fractol.tmx += 100 / param->fractol.zoom;
 	param->fractol.mx = param->fractol.tmx * param->fractol.zoom;
 	mlx_clear_window(param->mlx, param->window.reference);
-	mspawner(param->img, &param->fractol);
+	jspawner(param->img, &param->fractol, param);
 	mlx_put_image_to_window(param->mlx, param->window.reference,
 		param->img.img, 0, 0);
 	return (0);
 }
 
-int	ft_changecolor(t_program *param)
+int	ft_jchangecolor(t_program *param)
 {
 	if (param->fractol.rgb == 0)
 		param->fractol.rgb = 0x0009EE10;
@@ -72,7 +72,7 @@ int	ft_changecolor(t_program *param)
 		param->fractol.rgb = 0x000FAF77;
 	else if (param->fractol.rgb == 0x000FAF77)
 		param->fractol.rgb = 0;
-	mspawner(param->img, &param->fractol);
+	jspawner(param->img, &param->fractol, param);
 	mlx_put_image_to_window(param->mlx, param->window.reference,
 		param->img.img, 0, 0);
 	return (0);

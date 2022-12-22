@@ -6,7 +6,7 @@
 /*   By: pfaria-d <pfaria-d@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:42:22 by pfaria-d          #+#    #+#             */
-/*   Updated: 2022/12/22 11:07:01 by pfaria-d         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:51:11 by pfaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ void	mandelbrot_set(void)
 {
 	t_program	program;
 
+	program.fractol.rgb = 0;
 	program.fractol.zoom = 1;
 	program.fractol.mx = 0;
 	program.fractol.my = 0;
@@ -92,5 +93,7 @@ void	mandelbrot_set(void)
 	mlx_put_image_to_window(program.mlx, program.window.reference,
 		program.img.img, 0, 0);
 	mlx_mouse_hook(program.window.reference, ft_input, &program);
+	mlx_hook(program.window.reference, 17, 1L << 2, ft_close, &program);
+	mlx_key_hook(program.window.reference, ft_inputk, &program);
 	mlx_loop(program.mlx);
 }

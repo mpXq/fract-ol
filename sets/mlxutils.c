@@ -6,7 +6,7 @@
 /*   By: pfaria-d <pfaria-d@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 12:55:12 by pfaria-d          #+#    #+#             */
-/*   Updated: 2022/12/20 17:08:36 by pfaria-d         ###   ########.fr       */
+/*   Updated: 2022/12/22 15:08:53 by pfaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,11 +28,6 @@ int	rgb(int rgb)
 	return (tmp << 24 | tmp << 16 | tmp << 8 | rgb);
 }
 
-int	ft_close(void)
-{
-	exit(0);
-}
-
 t_window	new_window(void	*mlx, int widht, int height, char *name)
 {
 	t_window	window;
@@ -42,4 +37,12 @@ t_window	new_window(void	*mlx, int widht, int height, char *name)
 	window.size.y = height;
 	mlx_hook(window.reference, 17, 0, ft_close, 0);
 	return (window);
+}
+
+int	ft_close(t_program *vars)
+{
+	mlx_destroy_image(vars->mlx, vars->img.img);
+	mlx_destroy_window(vars->mlx, vars->window.reference);
+	system("leaks fractol");
+	exit(0);
 }

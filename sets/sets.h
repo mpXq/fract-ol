@@ -6,7 +6,7 @@
 /*   By: pfaria-d <pfaria-d@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/20 10:43:26 by pfaria-d          #+#    #+#             */
-/*   Updated: 2022/12/22 10:52:30 by pfaria-d         ###   ########.fr       */
+/*   Updated: 2022/12/22 14:42:54 by pfaria-d         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,16 @@ int			rgb(int rgb);
 void		mandelbrot_set(void);
 void		julia_set(long double zx, long double zy);
 t_window	new_window(void *mlx, int widht, int height, char *name);
-int			ft_close(void);
 int			ft_update(t_program *param);
 void		mspawner(t_data img, t_fractol *mset);
+int			ft_input51(int x, int y, t_program *param);
+int			ft_input42(int x, int y, t_program *param);
+int			ft_inputk(int key, t_program *param);
+int			ft_input123(t_program *param);
+int			ft_input124(t_program *param);
+int			ft_input125(t_program *param);
+int			ft_input126(t_program *param);
+int			ft_changecolor(t_program *param);
+int			ft_close(t_program *vars);
 
 #endif
